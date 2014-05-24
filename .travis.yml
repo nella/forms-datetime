@@ -1,0 +1,19 @@
+language: php
+
+env:
+  - NETTE=default
+  - NETTE=~2.1.0
+  - NETTE=~2.2.0
+
+php:
+  - 5.5
+  - 5.6
+
+before_script:
+  - php .travis.composer.php
+  - composer self-update
+  - composer install --no-interaction --prefer-source --dev
+
+script:
+    - vendor/bin/parallel-lint -e php,phpt src tests
+    - vendor/bin/tester -s -p php -c tests/php-unix.ini tests
