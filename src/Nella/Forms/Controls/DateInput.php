@@ -103,6 +103,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	{
 		$control = parent::getControl();
 		$control->value($this->getRawValue());
+		$control->type('text');
 		return $control;
 	}
 
