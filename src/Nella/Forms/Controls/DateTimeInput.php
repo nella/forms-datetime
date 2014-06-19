@@ -131,6 +131,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 			$control = \Nette\Utils\Html::el('input')->name($name . '[' . static::NAME_DATE . ']');
 			$control->data('nella-date-format', $this->dateFormat);
 			$control->value($this->date);
+			$control->type('text');
 
 			if ($this->disabled) {
 				$control->disabled($this->disabled);
@@ -141,6 +142,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 			$control = \Nette\Utils\Html::el('input')->name($name . '[' . static::NAME_TIME . ']');
 			$control->data('nella-time-format', $this->timeFormat);
 			$control->value($this->time);
+			$control->type('text');
 
 			if ($this->disabled) {
 				$control->disabled($this->disabled);
