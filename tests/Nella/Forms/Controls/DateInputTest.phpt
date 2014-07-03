@@ -125,10 +125,11 @@ class DateInputTest extends \Tester\TestCase
 			'date' => 'test',
 		));
 
+		$control->addRule([$control, 'validateDate'], 'test');
+
 		Assert::true($control->isFilled());
 		Assert::null($control->getValue());
 
-		\Nette\Forms\Rules::$defaultMessages[DateInput::VALID] = 'test';
 		$control->validate();
 
 		Assert::true($control->hasErrors());

@@ -22,8 +22,6 @@ use Nette\Forms\Rules;
  */
 class DateInput extends \Nette\Forms\Controls\BaseControl
 {
-	const VALID = ':dateValid';
-
 	/** @var bool */
 	private static $registered = false;
 
@@ -116,13 +114,13 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 		return $value !== NULL && $value !== array() && $value !== '';
 	}
 
-
-	public function validate()
+	/**
+	 * @param DateInput
+	 * @return bool
+	 */
+	public function validateDate(DateInput $control)
 	{
-		parent::validate();
-		if (!$this->isDisabled() && $this->getWorkingValue() === FALSE) {
-			$this->addError(Rules::$defaultMessages[static::VALID]);
-		}
+		return $this->isDisabled() || !$this->isFilled() || $this->getWorkingValue() !== FALSE;
 	}
 
 	public static function register()
@@ -132,8 +130,6 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 		}
 
 		static::$registered = true;
-
-		Rules::$defaultMessages[static::VALID] = 'Invalid date';
 
 		$class = get_called_class();
 		$callback = function (Container $_this, $name, $label = NULL, $format = 'Y-m-d') use ($class) {
