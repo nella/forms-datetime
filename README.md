@@ -27,6 +27,15 @@ $form->addDate('date', 'Date', 'Y-m-d');
 \Nella\Forms\Controls\DateTimeInput::register();
 $form->addDateTime('datetime', 'DateTime', 'Y-m-d', 'G:i');
 
+// Optional date[time] validation
+$form['date']
+	->addCondition(\Nette\Application\UI\Form::FILLED)
+		->addRule([$form['date'], 'validateDate'], 'Date is invalid');
+
+$form['datetime']
+	->addCondition(\Nette\Application\UI\Form::FILLED)
+		->addRule([$form['datetime'], 'validateDateTime'], 'Date time is invalid');
+
 ```
 
 Manual rendering
