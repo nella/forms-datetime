@@ -1,7 +1,10 @@
 Date/DateTime control for [Nette Framework](http://nette.org)
 =============================================================
 
-[![Latest Stable Version](https://poser.pugx.org/nella/forms-datetime/v/stable.png)](https://packagist.org/packages/nella/forms-datetime) | [![Build Status](https://travis-ci.org/nella/forms-datetime.png?branch=master)](https://travis-ci.org/nella/forms-datetime)
+[![Build Status](https://travis-ci.org/nella/forms-datetime.svg?branch=nette)](https://travis-ci.org/nella/forms-datetime)
+[![Latest Stable Version](https://poser.pugx.org/nella/forms-datetime/version.png)](https://packagist.org/packages/nella/forms-datetime)
+[![Composer Downloads](https://poser.pugx.org/nella/forms-datetime/d/total.png)](https://packagist.org/packages/nella/forms-datetime)
+[![Dependency Status](https://www.versioneye.com/user/projects/53a201e883add7719f000004/badge.svg?style=flat)](https://www.versioneye.com/user/projects/53a201e883add7719f000004)
 
 Installation
 ------------
