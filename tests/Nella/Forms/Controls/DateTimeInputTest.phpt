@@ -21,6 +21,7 @@ require __DIR__ . '/../../../bootstrap.php';
 
 class DateTimeInputTest extends \Tester\TestCase
 {
+
 	/**
 	 * @return array[]|array
 	 */
@@ -178,6 +179,7 @@ class DateTimeInputTest extends \Tester\TestCase
 
 		return $control;
 	}
+
 }
 
 id(new DateTimeInputTest)->run(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : NULL);

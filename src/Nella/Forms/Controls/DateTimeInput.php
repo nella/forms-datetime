@@ -13,12 +13,11 @@ namespace Nella\Forms\Controls;
 use DateTimeImmutable;
 use Nette\Forms\Container;
 use Nette\Forms\Form;
-use Nette\Forms\Rules;
 
 /**
  * Date time input form control
  *
- * @author        Patrik Votoček
+ * @author Patrik Votoček
  *
  * @property string $value
  */
@@ -30,7 +29,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	const NAME_TIME = 'time';
 
 	/** @var bool */
-	private static $registered = false;
+	private static $registered = FALSE;
 
 	/** @var string */
 	private $dateFormat;
@@ -58,7 +57,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 
 	/**
 	 * @param \DateTimeInterface|NULL
-	 * @return \DateInput
+	 * @return \Nella\Forms\Controls\DateTimeInput
 	 */
 	public function setValue($value = NULL)
 	{
@@ -103,7 +102,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isFilled()
 	{
@@ -158,7 +157,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param DateTimeInput
+	 * @param \Nella\Forms\Control\DateTimeInput
 	 * @return bool
 	 */
 	public function validateDateTime(DateTimeInput $dateTimeInput)
@@ -183,4 +182,5 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 
 		Container::extensionMethod('addDateTime', $callback);
 	}
+
 }

@@ -11,19 +11,19 @@
 namespace Nella\Forms\Controls;
 
 use Nette\Forms\Container;
-use Nette\Forms\Rules;
 
 /**
  * Date input form control
  *
- * @author        Patrik Votoček
+ * @author Patrik Votoček
  *
  * @property string $value
  */
 class DateInput extends \Nette\Forms\Controls\BaseControl
 {
+
 	/** @var bool */
-	private static $registered = false;
+	private static $registered = FALSE;
 
 	/** @var string */
 	private $format;
@@ -42,7 +42,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 
 	/**
 	 * @param \DateTimeInterface|NULL
-	 * @return \DateInput
+	 * @return \Nella\Forms\Controls\DateInput
 	 */
 	public function setValue($value = NULL)
 	{
@@ -106,7 +106,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isFilled()
 	{
@@ -115,7 +115,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param DateInput
+	 * @param \Nella\Forms\Controls\DateInput
 	 * @return bool
 	 */
 	public function validateDate(DateInput $control)
@@ -140,4 +140,5 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 
 		Container::extensionMethod('addDate', $callback);
 	}
+
 }
