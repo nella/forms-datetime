@@ -21,15 +21,15 @@ Usage
 ```php
 
 $form = new \Nette\Forms\Form;
-$form->addComponent(new \Nella\Forms\Controls\DateInput('Date'), 'date');
-$form->addComponent(new \Nella\Forms\Controls\DateTimeInput('DateTime'), 'datetime');
+$form->addComponent(new \Nella\Forms\DateTime\DateInput('Date'), 'date');
+$form->addComponent(new \Nella\Forms\DateTime\DateTimeInput('DateTime'), 'datetime');
 
 // or
 
-\Nella\Forms\Controls\DateInput::register();
+\Nella\Forms\DateTime\DateInput::register();
 $form->addDate('date', 'Date', 'Y-m-d');
 
-\Nella\Forms\Controls\DateTimeInput::register();
+\Nella\Forms\DateTime\DateTimeInput::register();
 $form->addDateTime('datetime', 'DateTime', 'Y-m-d', 'G:i');
 
 // Optional date[time] validation

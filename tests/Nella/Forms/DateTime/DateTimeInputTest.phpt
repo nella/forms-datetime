@@ -1,6 +1,6 @@
 <?php
 /**
- * Test: Nella\Forms\Controls\DateInput
+ * Test: Nella\Forms\DateTime\DateTimeInput
  * @testCase
  *
  * This file is part of the Nella Project (http://nella-project.org).
@@ -11,7 +11,7 @@
  * please view the file LICENSE.md that was distributed with this source code.
  */
 
-namespace Nella\Forms\Controls;
+namespace Nella\Forms\DateTime;
 
 use DateTime;
 use DateTimeImmutable;
@@ -19,7 +19,7 @@ use Tester\Assert;
 
 require __DIR__ . '/../../../bootstrap.php';
 
-class DateInputTest extends \Tester\TestCase
+class DateTimeInputTest extends \Tester\TestCase
 {
 
 	/**
@@ -37,12 +37,14 @@ class DateInputTest extends \Tester\TestCase
 	/**
 	 * @return array[]|array
 	 */
-	public function dataValidDates()
+	public function dataValidDateTimes()
 	{
 		return array(
-			array(NULL, NULL),
-			array('', NULL),
-			array('1978-01-23', new DateTimeImmutable('1978-01-23 00:00:00')),
+			array(NULL, NULL, NULL),
+			array(NULL, '', NULL),
+			array('', NULL, NULL),
+			array('', '', NULL),
+			array('1978-01-23', '12:00', new DateTimeImmutable('1978-01-23 12:00:00')),
 		);
 	}
 
@@ -64,9 +66,9 @@ class DateInputTest extends \Tester\TestCase
 	 * @param DateTimeImmutable|NULL
 	 * @param DateTimeImmutable|NULL
 	 */
-	public function testValidDates($input, $expected)
+	public function testValidDateTimes($input, $expected)
 	{
-		$control = new DateInput;
+		$control = new DateTimeInput;
 
 		$control->setValue($input);
 
@@ -79,22 +81,23 @@ class DateInputTest extends \Tester\TestCase
 	 *
 	 * @param string
 	 */
-	public function testInvalidDates($input)
+	public function testInvalidDateTimes($input)
 	{
-		$control = new DateInput;
+		$control = new DateTimeInput;
 		$control->setValue($input);
 	}
 
 	public function testHtml()
 	{
 		$form = new \Nette\Forms\Form;
-		$control = new DateInput;
-		$form->addComponent($control, 'date');
-		$control->setValue(new DateTimeImmutable('1978-01-23 00:00:00'));
+		$control = new DateTimeInput;
+		$form->addComponent($control, 'datetime');
+		$control->setValue(new DateTimeImmutable('1978-01-23 12:00:00'));
 
 		$dq = \Tester\DomQuery::fromHtml((string) $control->getControl());
 
 		Assert::true($dq->has("input[value='1978-01-23']"));
+		Assert::true($dq->has("input[value='12:00']"));
 	}
 
 	public function testLoadHttpDataEmpty()
@@ -106,15 +109,18 @@ class DateInputTest extends \Tester\TestCase
 	}
 
 	/**
-	 * @dataProvider dataValidDates
+	 * @dataProvider dataValidDateTimes
 	 *
 	 * @param mixed
 	 * @param DateTimeImmutable|NULL
 	 */
-	public function testLoadHttpDataValid($input, $expected)
+	public function testLoadHttpDataValid($date, $time, $expected)
 	{
 		$control = $this->createControl(array(
-			'date' => $input,
+			'datetime' => array(
+				'date' => $date,
+				'time' => $time,
+			),
 		));
 
 		Assert::equal($expected, $control->getValue());
@@ -123,10 +129,13 @@ class DateInputTest extends \Tester\TestCase
 	public function testLoadHttpDataInvalid()
 	{
 		$control = $this->createControl(array(
-			'date' => 'test',
+			'datetime' => array(
+				'date' => 'test',
+				'time' => 'test',
+			),
 		));
 
-		$control->addRule([$control, 'validateDate'], 'test');
+		$control->addRule([$control, 'validateDateTime'], 'test');
 
 		Assert::true($control->isFilled());
 		Assert::null($control->getValue());
@@ -142,17 +151,17 @@ class DateInputTest extends \Tester\TestCase
 	 */
 	public function testRegistrationMultiple()
 	{
-		DateInput::register();
-		DateInput::register();
+		DateTimeInput::register();
+		DateTimeInput::register();
 	}
 
 	public function testRegistration()
 	{
-		DateInput::register();
+		DateTimeInput::register();
 
 		$form = new \Nette\Forms\Form;
-		$control = $form->addDate('test', 'Test');
-		Assert::type('Nella\Forms\Controls\DateInput', $control);
+		$control = $form->addDateTime('test', 'Test');
+		Assert::type('Nella\Forms\DateTime\DateTimeInput', $control);
 		Assert::equal('test', $control->getName());
 		Assert::equal('Test', $control->caption);
 		Assert::same($form, $control->getForm());
@@ -165,12 +174,12 @@ class DateInputTest extends \Tester\TestCase
 		$_POST = $data;
 
 		$form = new \Nette\Forms\Form;
-		$control = new DateInput;
-		$form->addComponent($control, 'date');
+		$control = new DateTimeInput;
+		$form->addComponent($control, 'datetime');
 
 		return $control;
 	}
 
 }
 
-id(new DateInputTest)->run(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : NULL);
+id(new DateTimeInputTest)->run(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : NULL);

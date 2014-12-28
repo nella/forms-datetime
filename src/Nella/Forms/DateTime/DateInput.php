@@ -8,7 +8,7 @@
  * please view the file LICENSE.md that was distributed with this source code.
  */
 
-namespace Nella\Forms\Controls;
+namespace Nella\Forms\DateTime;
 
 use Nette\Forms\Container;
 
@@ -115,7 +115,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param \Nella\Forms\Controls\DateInput
+	 * @param \Nella\Forms\DateTime\DateInput
 	 * @return bool
 	 */
 	public function validateDate(DateInput $control)

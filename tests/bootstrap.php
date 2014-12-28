@@ -13,4 +13,5 @@ function id($val) {
 	return $val;
 }
 
-require_once __DIR__ . '/../src/Nella/Forms/Controls/DateInput.php';
+require_once __DIR__ . '/../src/Nella/Forms/DateTime/DateInput.php';
+require_once __DIR__ . '/../src/Nella/Forms/DateTime/DateTimeInput.php';
