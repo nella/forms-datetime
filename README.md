@@ -1,12 +1,12 @@
 Date/DateTime control for [Nette Framework](http://nette.org)
 =============================================================
 
-[![Build Status](https://travis-ci.org/nella/forms-datetime.svg?branch=master)](https://travis-ci.org/nella/forms-datetime)
-[![SensioLabsInsight Status](https://insight.sensiolabs.com/projects/26a217ba-02c8-4fd5-a93b-cb58db3e2811/mini.png)](https://insight.sensiolabs.com/projects/26a217ba-02c8-4fd5-a93b-cb58db3e2811)
-[![Latest Stable Version](https://poser.pugx.org/nella/forms-datetime/version.png)](https://packagist.org/packages/nella/forms-datetime)
-[![Composer Downloads](https://poser.pugx.org/nella/forms-datetime/d/total.png)](https://packagist.org/packages/nella/forms-datetime)
-[![Dependency Status](https://www.versioneye.com/user/projects/5467a35df8a4aeff6c0000e5/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5467a35df8a4aeff6c0000e5)
-[![HHVM Status](http://hhvm.h4cc.de/badge/nella/forms-datetime.svg)](http://hhvm.h4cc.de/package/nella/forms-datetime)
+[![Build Status](https://img.shields.io/travis/nella/forms-datetime.svg?style=flat-square)](https://travis-ci.org/nella/forms-datetime)
+[![SensioLabsInsight Status](https://img.shields.io/sensiolabs/i/26a217ba-02c8-4fd5-a93b-cb58db3e2811.svg?style=flat-square)](https://insight.sensiolabs.com/projects/26a217ba-02c8-4fd5-a93b-cb58db3e2811)
+[![Latest Stable Version](https://img.shields.io/packagist/v/nella/forms-datetime.svg?style=flat-square)](https://packagist.org/packages/nella/forms-datetime)
+[![Composer Downloads](https://img.shields.io/packagist/dt/nella/forms-datetime.svg?style=flat-square)](https://packagist.org/packages/nella/forms-datetime)
+[![Dependency Status](https://img.shields.io/versioneye/d/user/projects/5467a35df8a4aeff6c0000e5.svg?style=flat-square)](https://www.versioneye.com/user/projects/5467a35df8a4aeff6c0000e5)
+[![HHVM Status](https://img.shields.io/hhvm/nella/forms-datetime.svg?style=flat-square)](http://hhvm.h4cc.de/package/nella/forms-datetime)
 
 Installation
 ------------
