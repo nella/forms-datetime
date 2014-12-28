@@ -23,6 +23,10 @@ use Nette\Forms\Form;
  */
 class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 {
+
+	const DEFAULT_DATE_FORMAT = 'Y-m-d';
+	const DEFAULT_TIME_FORMAT = 'G:i';
+
 	const FORMAT_PATTERN = '%s %s';
 
 	const NAME_DATE = 'date';
@@ -48,7 +52,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 * @param string
 	 * @param string|NULL
 	 */
-	public function __construct($dateFormat = 'Y-m-d', $timeFormat = 'G:i', $label = NULL)
+	public function __construct($dateFormat = self::DEFAULT_DATE_FORMAT, $timeFormat = self::DEFAULT_TIME_FORMAT, $label = NULL)
 	{
 		parent::__construct($label);
 		$this->dateFormat = $dateFormat;

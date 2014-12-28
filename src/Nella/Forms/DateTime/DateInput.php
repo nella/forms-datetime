@@ -22,6 +22,8 @@ use Nette\Forms\Container;
 class DateInput extends \Nette\Forms\Controls\BaseControl
 {
 
+	const DEFAULT_FORMAT = 'Y-m-d';
+
 	/** @var bool */
 	private static $registered = FALSE;
 
@@ -32,7 +34,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	 * @param string
 	 * @param string|NULL
 	 */
-	public function __construct($format = 'Y-m-d', $label = NULL)
+	public function __construct($format = self::DEFAULT_FORMAT, $label = NULL)
 	{
 		parent::__construct($label);
 		$this->format = $format;
