@@ -42,7 +42,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 
 	/**
 	 * @param \DateTimeInterface|NULL
-	 * @return \Nella\Forms\Controls\DateInput
+	 * @return \Nella\Forms\DateTime\DateInput
 	 */
 	public function setValue($value = NULL)
 	{

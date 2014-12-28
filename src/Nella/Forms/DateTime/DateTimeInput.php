@@ -57,7 +57,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 
 	/**
 	 * @param \DateTimeInterface|NULL
-	 * @return \Nella\Forms\Controls\DateTimeInput
+	 * @return \Nella\Forms\DateTime\DateTimeInput
 	 */
 	public function setValue($value = NULL)
 	{
