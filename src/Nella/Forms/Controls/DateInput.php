@@ -129,7 +129,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 			throw new \Nette\InvalidStateException('DateInput control already registered.');
 		}
 
-		static::$registered = true;
+		static::$registered = TRUE;
 
 		$class = get_called_class();
 		$callback = function (Container $_this, $name, $label = NULL, $format = 'Y-m-d') use ($class) {
