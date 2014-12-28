@@ -22,6 +22,9 @@
 			"Nella\\Forms\\DateTime\\": "src/Nella/Forms/DateTime"
 		}
 	},
+	"autoload-dev": {
+		"classmap": ["tests/Nella"]
+	},
 	"require": {
 		"php": ">=5.5.0",
 		"nette/forms": "~2.2,<2.3.0"
