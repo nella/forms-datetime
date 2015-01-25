@@ -146,6 +146,46 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::equal(array('test'), $control->getErrors());
 	}
 
+	public function testLoadHttpDataInvalidDate()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'date' => '2015-02-31',
+				'time' => '11:59',
+			),
+		));
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		Assert::true($control->isFilled());
+		Assert::null($control->getValue());
+
+		$control->validate();
+
+		Assert::true($control->hasErrors());
+		Assert::equal(array('test'), $control->getErrors());
+	}
+
+	public function testLoadHttpDataInvalidTime()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'date' => '2015-02-28',
+				'time' => '11:61',
+			),
+		));
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		Assert::true($control->isFilled());
+		Assert::null($control->getValue());
+
+		$control->validate();
+
+		Assert::true($control->hasErrors());
+		Assert::equal(array('test'), $control->getErrors());
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */

@@ -137,6 +137,23 @@ class DateInputTest extends \Tester\TestCase
 		Assert::equal(array('test'), $control->getErrors());
 	}
 
+	public function testLoadHttpDataInvalidDate()
+	{
+		$control = $this->createControl(array(
+			'date' => '2015-02-31',
+		));
+
+		$control->addRule([$control, 'validateDate'], 'test');
+
+		Assert::true($control->isFilled());
+		Assert::null($control->getValue());
+
+		$control->validate();
+
+		Assert::true($control->hasErrors());
+		Assert::equal(array('test'), $control->getErrors());
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */

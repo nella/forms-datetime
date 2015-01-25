@@ -88,21 +88,16 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 			return NULL;
 		}
 
-		$value = $this->getWorkingValue();
+		$format = sprintf(static::FORMAT_PATTERN, $this->dateFormat, $this->timeFormat);
+		$datetimeString = sprintf(static::FORMAT_PATTERN, $this->date, $this->time);
 
-		if ($value === FALSE) {
+		$datetime = DateTimeImmutable::createFromFormat($format, $datetimeString);
+
+		if ($datetime === FALSE || $datetime->format($format) !== $datetimeString) {
 			return NULL;
 		}
 
-		return $value;
-	}
-
-	public function getWorkingValue()
-	{
-		return DateTimeImmutable::createFromFormat(
-			sprintf(static::FORMAT_PATTERN, $this->dateFormat, $this->timeFormat),
-			sprintf(static::FORMAT_PATTERN, $this->date, $this->time)
-		);
+		return $datetime;
 	}
 
 	/**
@@ -166,7 +161,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function validateDateTime(DateTimeInput $dateTimeInput)
 	{
-		return $this->isDisabled() || !$this->isFilled() || $this->getWorkingValue() !== FALSE;
+		return $this->isDisabled() || !$this->isFilled() || $this->getValue() !== NULL;
 	}
 
 	public static function register()

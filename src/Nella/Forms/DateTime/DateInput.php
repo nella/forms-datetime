@@ -62,13 +62,16 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function getValue()
 	{
-		$value = $this->getWorkingValue();
-
-		if ($value === FALSE || $value === NULL) {
+		if (!$this->isFilled()) {
 			return NULL;
 		}
 
-		return $value->setTime(0, 0, 0);
+		$datetime = \DateTimeImmutable::createFromFormat($this->format, $this->getRawValue());
+		if ($datetime === FALSE || $datetime->format($this->format) !== $this->getRawValue()) {
+			return NULL;
+		}
+
+		return $datetime->setTime(0, 0, 0);
 	}
 
 	/**
@@ -82,18 +85,6 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	public function loadHttpData()
 	{
 		parent::setValue($this->getHttpData(\Nette\Forms\Form::DATA_TEXT));
-	}
-
-	/**
-	 * @return \DateTimeImmutable|FALSE|NULL
-	 */
-	private function getWorkingValue()
-	{
-		if (empty($this->getRawValue())) {
-			return NULL;
-		}
-
-		return \DateTimeImmutable::createFromFormat($this->format, $this->getRawValue());
 	}
 
 	/**
@@ -122,7 +113,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function validateDate(DateInput $control)
 	{
-		return $this->isDisabled() || !$this->isFilled() || $this->getWorkingValue() !== FALSE;
+		return $this->isDisabled() || !$this->isFilled() || $this->getValue() !== NULL;
 	}
 
 	public static function register()
