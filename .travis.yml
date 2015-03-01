@@ -1,5 +1,7 @@
 language: php
 
+sudo: false
+
 env:
   - NETTE=default
   - NETTE=~2.2.0
@@ -7,18 +9,26 @@ env:
 php:
   - 5.5
   - 5.6
+  - 7.0
+  - nightly
   - hhvm
+  - hhvm-nightly
 
 matrix:
+  fast_finish: true
   allow_failures:
-    - php: hhvm
+    - php: 7.0
+    - php: nightly
+    - php: hhvm-nightly
 
-before_script:
-  - php .travis.composer.php
+before_install:
   - composer self-update
+  - php .travis.composer.php
+
+install:
   - composer install --no-interaction --prefer-source --dev
 
 script:
   - vendor/bin/parallel-lint -e php,phpt src tests
-  - vendor/bin/phpcs -sp --standard=vendor/nella/coding-standard/Nella/ruleset.xml --ignore=tests/bootstrap.php src tests
+  - vendor/bin/phpcs -sp --standard=vendor/nella/coding-standard/Nella/ruleset.xml src tests
   - vendor/bin/tester -s -p php -c tests/php.ini tests
