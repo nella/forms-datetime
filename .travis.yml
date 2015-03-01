@@ -5,7 +5,9 @@ sudo: false
 env:
   - NETTE=default
   - NETTE=~2.2.0
+  - NETTE=~2.2.0 PREFER_LOWEST=true
   - NETTE=~2.3.0
+  - NETTE=~2.3.0 PREFER_LOWEST=true
 
 php:
   - 5.5
@@ -28,6 +30,7 @@ before_install:
 
 install:
   - composer install --no-interaction --prefer-source --dev
+  - if  [ $PREFER_LOWEST = 'true' ]; then composer update --prefer-lowest --prefer-stable; fi
 
 script:
   - vendor/bin/parallel-lint -e php,phpt src tests
