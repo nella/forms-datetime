@@ -2,11 +2,17 @@ Date/DateTime control for [Nette Framework](http://nette.org)
 =============================================================
 
 [![Build Status](https://img.shields.io/travis/nella/forms-datetime.svg?style=flat-square)](https://travis-ci.org/nella/forms-datetime)
+[![Code Coverage](https://img.shields.io/coveralls/nella/forms-datetime.svg?style=flat-square)](https://coveralls.io/r/nella/forms-datetime)
 [![SensioLabsInsight Status](https://img.shields.io/sensiolabs/i/26a217ba-02c8-4fd5-a93b-cb58db3e2811.svg?style=flat-square)](https://insight.sensiolabs.com/projects/26a217ba-02c8-4fd5-a93b-cb58db3e2811)
 [![Latest Stable Version](https://img.shields.io/packagist/v/nella/forms-datetime.svg?style=flat-square)](https://packagist.org/packages/nella/forms-datetime)
 [![Composer Downloads](https://img.shields.io/packagist/dt/nella/forms-datetime.svg?style=flat-square)](https://packagist.org/packages/nella/forms-datetime)
 [![Dependency Status](https://img.shields.io/versioneye/d/user/projects/5467a35df8a4aeff6c0000e5.svg?style=flat-square)](https://www.versioneye.com/user/projects/5467a35df8a4aeff6c0000e5)
 [![HHVM Status](https://img.shields.io/hhvm/nella/forms-datetime.svg?style=flat-square)](http://hhvm.h4cc.de/package/nella/forms-datetime)
+
+Requirements
+------------
+- Nette >=2.2.0 (2.2.x support will be removed on 31 Jan 2016)
+- PHP >=5.4.0 (5.4.x support will be removed on 14 Sep 2015)
 
 Installation
 ------------
