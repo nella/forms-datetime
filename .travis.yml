@@ -29,7 +29,7 @@ before_install:
   - php .travis.composer.php
 
 install:
-  - composer install --no-interaction --prefer-source --dev
+  - composer install --no-interaction --prefer-source
   - if  [ $PREFER_LOWEST = 'true' ]; then composer update --prefer-lowest --prefer-stable; fi
 
 script:
