@@ -38,6 +38,15 @@
 	"suggest": {
 		"latte/latte": "For manual rendering support"
 	},
+	"archive": {
+		"exclude": [
+			".gitattributes",
+			".gitignore",
+			"/.travis.yml",
+			"/.travis.composer.php",
+			"/tests"
+		]
+	},
 	"minimum-stability": "dev",
 	"prefer-stable": true
 }
