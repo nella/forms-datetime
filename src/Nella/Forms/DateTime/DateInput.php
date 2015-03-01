@@ -125,9 +125,14 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 		static::$registered = TRUE;
 
 		$class = get_called_class();
-		$callback = function (Container $_this, $name, $label = NULL, $format = 'Y-m-d') use ($class) {
+		$callback = function (
+			Container $container,
+			$name,
+			$label = NULL,
+			$format = self::DEFAULT_FORMAT
+		) use ($class) {
 			$control = new $class($format, $label);
-			$_this->addComponent($control, $name);
+			$container->addComponent($control, $name);
 			return $control;
 		};
 

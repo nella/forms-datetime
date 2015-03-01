@@ -9,6 +9,7 @@ if (!class_exists('Tester\Assert')) {
 
 Tester\Environment::setup();
 
-function id($val) {
+function id($val)
+{
 	return $val;
 }

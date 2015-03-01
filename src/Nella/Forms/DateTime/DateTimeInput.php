@@ -52,7 +52,11 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 * @param string
 	 * @param string|NULL
 	 */
-	public function __construct($dateFormat = self::DEFAULT_DATE_FORMAT, $timeFormat = self::DEFAULT_TIME_FORMAT, $label = NULL)
+	public function __construct(
+		$dateFormat = self::DEFAULT_DATE_FORMAT,
+		$timeFormat = self::DEFAULT_TIME_FORMAT,
+		$label = NULL
+	)
 	{
 		parent::__construct($label);
 		$this->dateFormat = $dateFormat;
@@ -173,9 +177,15 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 		static::$registered = TRUE;
 
 		$class = get_called_class();
-		$callback = function (Container $_this, $name, $label = NULL, $dateFormat = 'Y-m-d', $timeFormat = 'G:i') use ($class) {
+		$callback = function (
+			Container $container,
+			$name,
+			$label = NULL,
+			$dateFormat = self::DEFAULT_DATE_FORMAT,
+			$timeFormat = self::DEFAULT_TIME_FORMAT
+		) use ($class) {
 			$control = new $class($dateFormat, $timeFormat, $label);
-			$_this->addComponent($control, $name);
+			$container->addComponent($control, $name);
 			return $control;
 		};
 
