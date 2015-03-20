@@ -245,8 +245,8 @@ class DateTimeInputTest extends \Tester\TestCase
 	{
 		$control = $this->createControl();
 
-		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_DATE)->disabled));
-		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_TIME)->disabled));
+		Assert::false($control->getControlPart(DateTimeInput::NAME_DATE)->disabled);
+		Assert::false($control->getControlPart(DateTimeInput::NAME_TIME)->disabled);
 
 		$control->setDisabled();
 

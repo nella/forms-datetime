@@ -146,13 +146,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 			$control->value($this->date);
 			$control->type('text');
 
-			if ($this->disabled) {
-				$control->disabled($this->disabled);
-			}
+			$control->disabled($this->disabled);
 
-			foreach ($this->dateAttributes as $name => $value) {
-				$control->$name = $value;
-			}
+			$control->addAttributes($this->dateAttributes);
 
 			return $control;
 		} elseif ($key === static::NAME_TIME) {
@@ -161,13 +157,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 			$control->value($this->time);
 			$control->type('text');
 
-			if ($this->disabled) {
-				$control->disabled($this->disabled);
-			}
+			$control->disabled($this->disabled);
 
-			foreach ($this->timeAttributes as $name => $value) {
-				$control->$name = $value;
-			}
+			$control->addAttributes($this->timeAttributes);
 
 			return $control;
 		}
