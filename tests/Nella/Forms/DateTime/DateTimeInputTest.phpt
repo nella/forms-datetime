@@ -264,6 +264,13 @@ class DateTimeInputTest extends \Tester\TestCase
 		$control->getControlPart('test');
 	}
 
+	public function testLabelPart()
+	{
+		$control = $this->createControl();
+
+		Assert::null($control->getLabelPart());
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */
