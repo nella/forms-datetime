@@ -163,6 +163,17 @@ class DateInputTest extends \Tester\TestCase
 		Assert::equal('readonly', $control->getControl()->readonly);
 	}
 
+	public function testDisabled()
+	{
+		$control = $this->createControl();
+
+		Assert::false($control->getControl()->disabled);
+
+		$control->setDisabled();
+
+		Assert::true($control->getControl()->disabled);
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */

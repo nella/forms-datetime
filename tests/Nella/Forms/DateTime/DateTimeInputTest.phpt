@@ -241,6 +241,19 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_DATE)->readonly));
 	}
 
+	public function testDisabled()
+	{
+		$control = $this->createControl();
+
+		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_DATE)->disabled));
+		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_TIME)->disabled));
+
+		$control->setDisabled();
+
+		Assert::true($control->getControlPart(DateTimeInput::NAME_DATE)->disabled);
+		Assert::true($control->getControlPart(DateTimeInput::NAME_TIME)->disabled);
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */
