@@ -154,6 +154,15 @@ class DateInputTest extends \Tester\TestCase
 		Assert::equal(array('test'), $control->getErrors());
 	}
 
+	public function testAttribute()
+	{
+		$control = $this->createControl();
+
+		$control->setAttribute('readonly', 'readonly');
+
+		Assert::equal('readonly', $control->getControl()->readonly);
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */

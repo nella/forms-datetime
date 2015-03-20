@@ -47,6 +47,12 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	/** @var string */
 	private $time;
 
+	/** @var mixed[]|array */
+	private $dateAttributes = array();
+
+	/** @var mixed[]|array */
+	private $timeAttributes = array();
+
 	/**
 	 * @param string
 	 * @param string
@@ -118,11 +124,18 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 		$this->time = $this->getHttpData(Form::DATA_LINE, '[' . static::NAME_TIME . ']');
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getControl()
 	{
 		return $this->getControlPart(static::NAME_DATE) . $this->getControlPart(static::NAME_TIME);
 	}
 
+	/**
+	 * @param string $key
+	 * @return \Nette\Utils\Html
+	 */
 	public function getControlPart($key)
 	{
 		$name = $this->getHtmlName();
@@ -137,6 +150,10 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 				$control->disabled($this->disabled);
 			}
 
+			foreach ($this->dateAttributes as $name => $value) {
+				$control->$name = $value;
+			}
+
 			return $control;
 		} elseif ($key === static::NAME_TIME) {
 			$control = \Nette\Utils\Html::el('input')->name($name . '[' . static::NAME_TIME . ']');
@@ -146,6 +163,10 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 
 			if ($this->disabled) {
 				$control->disabled($this->disabled);
+			}
+
+			foreach ($this->timeAttributes as $name => $value) {
+				$control->$name = $value;
 			}
 
 			return $control;
@@ -166,6 +187,51 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	public function validateDateTime(DateTimeInput $dateTimeInput)
 	{
 		return $this->isDisabled() || !$this->isFilled() || $this->getValue() !== NULL;
+	}
+
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 * @return \Nella\Forms\DateTime\DateTimeInput
+	 */
+	public function setDateAttribute($name, $value = TRUE)
+	{
+		if ($value === NULL) {
+			unset($this->dateAttributes[$name]);
+		} else {
+			$this->dateAttributes[$name] = $value;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 * @return \Nella\Forms\DateTime\DateTimeInput
+	 */
+	public function setTimeAttribute($name, $value = TRUE)
+	{
+		if ($value === NULL) {
+			unset($this->timeAttributes[$name]);
+		} else {
+			$this->timeAttributes[$name] = $value;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 * @return \Nella\Forms\DateTime\DateTimeInput
+	 */
+	public function setAttribute($name, $value = TRUE)
+	{
+		$this->setDateAttribute($name, $value);
+		$this->setTimeAttribute($name, $value);
+
+		return $this;
 	}
 
 	public static function register()

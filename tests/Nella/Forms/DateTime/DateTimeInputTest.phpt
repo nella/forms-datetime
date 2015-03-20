@@ -186,6 +186,36 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::equal(array('test'), $control->getErrors());
 	}
 
+	public function testAttribute()
+	{
+		$control = $this->createControl();
+
+		$control->setAttribute('readonly', 'readonly');
+
+		Assert::equal('readonly', $control->getControlPart(DateTimeInput::NAME_DATE)->readonly);
+		Assert::equal('readonly', $control->getControlPart(DateTimeInput::NAME_TIME)->readonly);
+	}
+
+	public function testDateAttribute()
+	{
+		$control = $this->createControl();
+
+		$control->setDateAttribute('readonly', 'readonly');
+
+		Assert::equal('readonly', $control->getControlPart(DateTimeInput::NAME_DATE)->readonly);
+		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_TIME)->readonly));
+	}
+
+	public function testTimeAttribute()
+	{
+		$control = $this->createControl();
+
+		$control->setTimeAttribute('readonly', 'readonly');
+
+		Assert::equal('readonly', $control->getControlPart(DateTimeInput::NAME_TIME)->readonly);
+		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_DATE)->readonly));
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */
