@@ -35,8 +35,8 @@ install:
 script:
   - vendor/bin/parallel-lint -e php,phpt src tests
   - vendor/bin/phpcs -sp --standard=vendor/nella/coding-standard/Nella/ruleset.xml src tests
-  - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ] && [ $NETTE = 'default']; then vendor/bin/tester -s -p php -c tests/php.ini tests --coverage build/clover.xml --coverage-src src; else vendor/bin/tester -s -p php -c tests/php.ini tests; fi
+  - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ] && [ $NETTE = 'default' ]; then vendor/bin/tester -s -p php -c tests/php.ini tests --coverage build/clover.xml --coverage-src src; else vendor/bin/tester -s -p php -c tests/php.ini tests; fi
 
 after_script:
   - export CI_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
-  - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ] && [ $NETTE = 'default']; then vendor/bin/coveralls -v; fi
+  - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ] && [ $NETTE = 'default' ]; then vendor/bin/coveralls -v; fi
