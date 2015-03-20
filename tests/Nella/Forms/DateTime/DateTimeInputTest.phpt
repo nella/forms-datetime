@@ -196,6 +196,21 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::equal('readonly', $control->getControlPart(DateTimeInput::NAME_TIME)->readonly);
 	}
 
+	public function testRemovingAttribute()
+	{
+		$control = $this->createControl();
+
+		$control->setAttribute('readonly', 'readonly');
+
+		Assert::equal('readonly', $control->getControlPart(DateTimeInput::NAME_DATE)->readonly);
+		Assert::equal('readonly', $control->getControlPart(DateTimeInput::NAME_TIME)->readonly);
+
+		$control->setAttribute('readonly', NULL);
+
+		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_DATE)->readonly));
+		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_TIME)->readonly));
+	}
+
 	public function testDateAttribute()
 	{
 		$control = $this->createControl();
