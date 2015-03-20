@@ -255,6 +255,16 @@ class DateTimeInputTest extends \Tester\TestCase
 	}
 
 	/**
+	 * @throws \Nette\InvalidArgumentException
+	 */
+	public function testInvalidControlPart()
+	{
+		$control = $this->createControl();
+
+		$control->getControlPart('test');
+	}
+
+	/**
 	 * @throws \Nette\InvalidStateException
 	 */
 	public function testRegistrationMultiple()
