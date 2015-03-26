@@ -271,6 +271,67 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::null($control->getLabelPart());
 	}
 
+	public function testFilledDate()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'date' => '1978-01-23',
+			),
+		));
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		$control->validate();
+
+		Assert::true($control->isFilled());
+		Assert::true($control->hasErrors());
+	}
+
+	public function testFilledTime()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'time' => '12:00',
+			),
+		));
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		$control->validate();
+
+		Assert::true($control->isFilled());
+		Assert::true($control->hasErrors());
+	}
+
+	public function testFilledBoth()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'date' => '1978-01-23',
+				'time' => '12:00',
+			),
+		));
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		$control->validate();
+
+		Assert::true($control->isFilled());
+		Assert::false($control->hasErrors());
+	}
+
+	public function testNotFilled()
+	{
+		$control = $this->createControl();
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		$control->validate();
+
+		Assert::false($control->isFilled());
+		Assert::false($control->hasErrors());
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */

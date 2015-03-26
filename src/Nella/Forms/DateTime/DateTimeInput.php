@@ -115,7 +115,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function isFilled()
 	{
-		return !empty($this->date) && !empty($this->time);
+		return !empty($this->date) || !empty($this->time);
 	}
 
 	public function loadHttpData()
