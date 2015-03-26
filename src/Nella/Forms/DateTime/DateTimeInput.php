@@ -53,6 +53,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	/** @var mixed[]|array */
 	private $timeAttributes = array();
 
+	/** @var bool */
+	private $sanitizeShortHour = TRUE;
+
 	/**
 	 * @param string
 	 * @param string
@@ -122,6 +125,12 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	{
 		$this->date = $this->getHttpData(Form::DATA_LINE, '[' . static::NAME_DATE . ']');
 		$this->time = $this->getHttpData(Form::DATA_LINE, '[' . static::NAME_TIME . ']');
+
+		if ($this->sanitizeShortHour && \Nette\Utils\Strings::startsWith(\Nette\Utils\Strings::lower($this->timeFormat), 'g')) {
+			if (\Nette\Utils\Strings::startsWith($this->time, '00')) {
+				$this->time = \Nette\Utils\Strings::substring($this->time, 1);
+			}
+		}
 	}
 
 	/**
@@ -224,6 +233,11 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 		$this->setTimeAttribute($name, $value);
 
 		return $this;
+	}
+
+	public function disableShortHourSanitizer()
+	{
+		$this->sanitizeShortHour = false;
 	}
 
 	public static function register()

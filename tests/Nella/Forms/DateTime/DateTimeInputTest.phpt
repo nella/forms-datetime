@@ -332,6 +332,41 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::false($control->hasErrors());
 	}
 
+	public function testShortHourSanitizer()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'date' => '1978-01-23',
+				'time' => '00:00',
+			),
+		));
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		$control->validate();
+
+		Assert::false($control->hasErrors());
+	}
+
+	public function testShortHourSanitizerDisabled()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'date' => '1978-01-23',
+				'time' => '00:00',
+			),
+		));
+
+		$control->disableShortHourSanitizer();
+		$control->loadHttpData(); // this must be called
+
+		$control->addRule([$control, 'validateDateTime'], 'test');
+
+		$control->validate();
+
+		Assert::true($control->hasErrors());
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */
