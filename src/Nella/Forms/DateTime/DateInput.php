@@ -30,9 +30,6 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	/** @var string */
 	private $format;
 
-	/** @var mixed[]|array */
-	private $attributes = array();
-
 	/**
 	 * @param string
 	 * @param string|NULL
