@@ -56,6 +56,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	/** @var bool */
 	private $sanitizeShortHour = TRUE;
 
+	/** @var bool */
+	private $strict = FALSE;
+
 	/**
 	 * @param string
 	 * @param string
@@ -70,6 +73,24 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 		parent::__construct($label);
 		$this->dateFormat = $dateFormat;
 		$this->timeFormat = $timeFormat;
+	}
+
+	/**
+	 * @return \Nella\Forms\DateTime\DateInput
+	 */
+	public function enableStrict()
+	{
+		$this->strict = true;
+		return $this;
+	}
+
+	/**
+	 * @return \Nella\Forms\DateTime\DateInput
+	 */
+	public function disableStrict()
+	{
+		$this->strict = false;
+		return $this;
 	}
 
 	/**
@@ -97,7 +118,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function getValue()
 	{
-		if (empty($this->date) || empty($this->time)) {
+		if ($this->date === NULL || $this->time === NULL) {
 			return NULL;
 		}
 
@@ -118,7 +139,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function isFilled()
 	{
-		return !empty($this->date) || !empty($this->time);
+		return $this->date !== NULL || $this->time !== NULL;
 	}
 
 	public function loadHttpData()
@@ -126,11 +147,48 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 		$this->date = $this->getHttpData(Form::DATA_LINE, '[' . static::NAME_DATE . ']');
 		$this->time = $this->getHttpData(Form::DATA_LINE, '[' . static::NAME_TIME . ']');
 
+		if (empty($this->date)) {
+			$this->date = NULL;
+		}
+		if (empty($this->time)) {
+			$this->time = NULL;
+		}
+		if (empty($this->date) && empty($this->time)) {
+			return;
+		}
+
 		if ($this->sanitizeShortHour && \Nette\Utils\Strings::startsWith(\Nette\Utils\Strings::lower($this->timeFormat), 'g')) {
 			if (\Nette\Utils\Strings::startsWith($this->time, '00')) {
 				$this->time = \Nette\Utils\Strings::substring($this->time, 1);
 			}
 		}
+
+		$inputString = sprintf(
+			static::FORMAT_PATTERN,
+			$this->normalizeFormat($this->date),
+			$this->normalizeFormat($this->time)
+		);
+		$datetimeFormat = sprintf(
+			static::FORMAT_PATTERN,
+			$this->normalizeFormat($this->dateFormat),
+			$this->normalizeFormat($this->timeFormat)
+		);
+		$datetime = \DateTimeImmutable::createFromFormat($datetimeFormat, $inputString);
+
+		/*
+		var_dump($inputString);
+		var_dump($datetimeFormat);
+		var_dump($datetime);
+		*/
+
+		if ($datetime === FALSE || $datetime->format($datetimeFormat) !== $inputString) {
+			$this->date = FALSE;
+			$this->time = FALSE;
+			return;
+		}
+
+		$this->date = $datetime->format($this->dateFormat);
+		$this->time = $datetime->format($this->timeFormat);
 	}
 
 	/**
@@ -238,6 +296,19 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	public function disableShortHourSanitizer()
 	{
 		$this->sanitizeShortHour = false;
+	}
+
+	/**
+	 * @param string
+	 * @return string
+	 */
+	private function normalizeFormat($input)
+	{
+		if ($this->strict) {
+			return $input;
+		}
+
+		return \Nette\Utils\Strings::replace($input, '~\s+~', '');
 	}
 
 	public static function register()

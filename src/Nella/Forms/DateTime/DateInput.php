@@ -30,6 +30,9 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	/** @var string */
 	private $format;
 
+	/** @var bool */
+	private $strict = FALSE;
+
 	/**
 	 * @param string
 	 * @param string|NULL
@@ -40,6 +43,24 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 		$this->format = $format;
 
 		$this->getControlPrototype()->data('nella-date-format', $format);
+	}
+
+	/**
+	 * @return \Nella\Forms\DateTime\DateInput
+	 */
+	public function enableStrict()
+	{
+		$this->strict = true;
+		return $this;
+	}
+
+	/**
+	 * @return \Nella\Forms\DateTime\DateInput
+	 */
+	public function disableStrict()
+	{
+		$this->strict = false;
+		return $this;
 	}
 
 	/**
@@ -84,7 +105,25 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 
 	public function loadHttpData()
 	{
-		parent::setValue($this->getHttpData(\Nette\Forms\Form::DATA_TEXT));
+		$input = $this->getHttpData(\Nette\Forms\Form::DATA_TEXT);
+		if (empty($input)) {
+			parent::setValue(NULL);
+			return;
+		}
+
+		$datetime = \DateTimeImmutable::createFromFormat(
+			$this->normalizeFormat($this->format),
+			$this->normalizeFormat($input)
+		);
+
+		if ($datetime !== FALSE
+			&& $datetime->format($this->normalizeFormat($this->format)) === $this->normalizeFormat($input)
+		) {
+			parent::setValue($datetime->format($this->format));
+			return;
+		}
+
+		parent::setValue(FALSE);
 	}
 
 	/**
@@ -114,6 +153,19 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	public function validateDate(DateInput $control)
 	{
 		return $this->isDisabled() || !$this->isFilled() || $this->getValue() !== NULL;
+	}
+
+	/**
+	 * @param string
+	 * @return string
+	 */
+	private function normalizeFormat($input)
+	{
+		if ($this->strict) {
+			return $input;
+		}
+
+		return \Nette\Utils\Strings::replace($input, '~\s+~', '');
 	}
 
 	public static function register()

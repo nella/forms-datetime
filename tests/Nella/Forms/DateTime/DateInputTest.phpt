@@ -175,6 +175,65 @@ class DateInputTest extends \Tester\TestCase
 	}
 
 	/**
+	 * @return array[]|array
+	 */
+	public function dataNonStrictDates()
+	{
+		$data = $this->dataValidDates();
+		$data[] = array('1978 - 01 - 23', new DateTimeImmutable('1978-01-23 00:00:00'));
+		return $data;
+	}
+
+	/**
+	 * @dataProvider dataNonStrictDates
+	 *
+	 * @param mixed
+	 * @param DateTimeImmutable|NULL
+	 */
+	public function testNonStrictLoadHttpDataValid($input, $expected)
+	{
+		$control = $this->createControl(array(
+			'date' => $input,
+		));
+		$control->disableStrict();
+
+		Assert::equal($expected, $control->getValue());
+	}
+
+	public function testLoadHttpDataValidStrictDate()
+	{
+		$control = $this->createControl(array(
+			'date' => '1978-01-23',
+		), true);
+
+		$control->addRule([$control, 'validateDate'], 'test');
+
+		Assert::true($control->isFilled());
+		Assert::equal(new DateTimeImmutable('1978-01-23 00:00:00'), $control->getValue());
+
+		$control->validate();
+
+		Assert::false($control->hasErrors());
+	}
+
+	public function testLoadHttpDataInvalidStrictDate()
+	{
+		$control = $this->createControl(array(
+			'date' => '2015 - 02 - 31',
+		), true);
+
+		$control->addRule([$control, 'validateDate'], 'test');
+
+		Assert::true($control->isFilled());
+		Assert::null($control->getValue());
+
+		$control->validate();
+
+		Assert::true($control->hasErrors());
+		Assert::equal(array('test'), $control->getErrors());
+	}
+
+	/**
 	 * @throws \Nette\InvalidStateException
 	 */
 	public function testRegistrationMultiple()
@@ -195,7 +254,7 @@ class DateInputTest extends \Tester\TestCase
 		Assert::same($form, $control->getForm());
 	}
 
-	private function createControl($data = array())
+	private function createControl($data = array(), $strict = false)
 	{
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$_FILES = array();
@@ -203,6 +262,11 @@ class DateInputTest extends \Tester\TestCase
 
 		$form = new \Nette\Forms\Form;
 		$control = new DateInput;
+		if ($strict) {
+			$control->enableStrict();
+		} else {
+			$control->disableStrict();
+		}
 		$form->addComponent($control, 'date');
 
 		return $control;
