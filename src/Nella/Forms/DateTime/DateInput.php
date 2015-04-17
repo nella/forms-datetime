@@ -123,7 +123,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 			return;
 		}
 
-		parent::setValue(FALSE);
+		parent::setValue('');
 	}
 
 	/**
@@ -143,7 +143,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	public function isFilled()
 	{
 		$value = $this->getRawValue();
-		return $value !== NULL && $value !== array() && $value !== '';
+		return $value !== NULL;
 	}
 
 	/**

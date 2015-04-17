@@ -175,15 +175,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 		);
 		$datetime = \DateTimeImmutable::createFromFormat($datetimeFormat, $inputString);
 
-		/*
-		var_dump($inputString);
-		var_dump($datetimeFormat);
-		var_dump($datetime);
-		*/
-
 		if ($datetime === FALSE || $datetime->format($datetimeFormat) !== $inputString) {
-			$this->date = FALSE;
-			$this->time = FALSE;
+			$this->date = '';
+			$this->time = '';
 			return;
 		}
 
