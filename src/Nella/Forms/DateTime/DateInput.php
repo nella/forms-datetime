@@ -11,6 +11,7 @@
 namespace Nella\Forms\DateTime;
 
 use Nette\Forms\Container;
+use Nette\Forms\Form;
 
 /**
  * Date input form control
@@ -166,6 +167,26 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 		}
 
 		return \Nette\Utils\Strings::replace($input, '~\s+~', '');
+	}
+
+	/**
+	 * @param string $message
+	 * @return \Nella\Forms\DateTime\DateInput
+	 */
+	public function setRequired($message = TRUE)
+	{
+		if (!is_string($message)) {
+			throw new \Nette\InvalidArgumentException('Message must be string');
+		}
+
+		parent::setRequired($message);
+
+		$this->addCondition(Form::FILLED)
+			->addRule(function(DateInput $control) {
+				return $this->validateDate($control);
+			}, $message);
+
+		return $this;
 	}
 
 	public static function register()

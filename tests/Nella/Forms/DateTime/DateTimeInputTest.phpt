@@ -467,6 +467,36 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::true($dq->has("input[value='12:00']"));
 	}
 
+	public function testInvalidRequired()
+	{
+		$control = $this->createControl(array(
+			'datetime' => array(
+				'date' => '2012-02-31',
+				'time' => '25:61',
+			),
+		), true);
+
+		$control->setRequired('test');
+
+		Assert::true($control->isFilled());
+		Assert::null($control->getValue());
+
+		$control->validate();
+
+		Assert::true($control->hasErrors());
+		Assert::equal(array('test'), $control->getErrors());
+	}
+
+	/**
+	 * @throws \Nette\InvalidArgumentException
+	 */
+	public function testRequiredInvalidMessage()
+	{
+		$control = $this->createControl();
+
+		$control->setRequired();
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */
