@@ -59,6 +59,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	/** @var bool */
 	private $strict = FALSE;
 
+	/** @var \DateTimeImmutable|null */
+	private $defaultTime;
+
 	/**
 	 * @param string
 	 * @param string
@@ -215,7 +218,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 		} elseif ($key === static::NAME_TIME) {
 			$control = \Nette\Utils\Html::el('input')->name($name . '[' . static::NAME_TIME . ']');
 			$control->data('nella-time-format', $this->timeFormat);
-			$control->value($this->time);
+			$control->value(
+				$this->time === null && $this->defaultTime !== null ? $this->defaultTime->format($this->timeFormat) : $this->time
+			);
 			$control->type('text');
 
 			$control->disabled($this->disabled);
@@ -290,6 +295,11 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	public function disableShortHourSanitizer()
 	{
 		$this->sanitizeShortHour = false;
+	}
+
+	public function setDefaultTime(\DateTimeImmutable $defaultTime = NULL)
+	{
+		$this->defaultTime = $defaultTime;
 	}
 
 	/**

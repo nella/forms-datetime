@@ -457,6 +457,16 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::equal(array('test'), $control->getErrors());
 	}
 
+	public function testDefaultTime()
+	{
+		$control = $this->createControl();
+		$control->setDefaultTime(new \DateTimeImmutable('2015-04-20 12:00:00'));
+
+		$dq = \Tester\DomQuery::fromHtml((string) $control->getControlPart(DateTimeInput::NAME_TIME));
+
+		Assert::true($dq->has("input[value='12:00']"));
+	}
+
 	/**
 	 * @throws \Nette\InvalidStateException
 	 */
