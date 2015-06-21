@@ -182,7 +182,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 		parent::setRequired($message);
 
 		$this->addCondition(Form::FILLED)
-			->addRule(function(DateInput $control) {
+			->addRule(function (DateInput $control) {
 				return $this->validateDate($control);
 			}, $message);
 
