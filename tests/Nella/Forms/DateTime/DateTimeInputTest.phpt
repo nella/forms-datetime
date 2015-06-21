@@ -27,11 +27,11 @@ class DateTimeInputTest extends \Tester\TestCase
 	 */
 	public function dataValidDateValues()
 	{
-		return array(
-			array(NULL, NULL),
-			array(new DateTimeImmutable('1978-01-23 00:00:00'), new DateTimeImmutable('1978-01-23 00:00:00')),
-			array(new DateTime('1978-01-23 00:00:00'), new DateTimeImmutable('1978-01-23 00:00:00')),
-		);
+		return [
+			[NULL, NULL],
+			[new DateTimeImmutable('1978-01-23 00:00:00'), new DateTimeImmutable('1978-01-23 00:00:00')],
+			[new DateTime('1978-01-23 00:00:00'), new DateTimeImmutable('1978-01-23 00:00:00')],
+		];
 	}
 
 	/**
@@ -39,13 +39,13 @@ class DateTimeInputTest extends \Tester\TestCase
 	 */
 	public function dataValidDateTimes()
 	{
-		return array(
-			array(NULL, NULL, NULL),
-			array(NULL, '', NULL),
-			array('', NULL, NULL),
-			array('', '', NULL),
-			array('1978-01-23', '12:00', new DateTimeImmutable('1978-01-23 12:00:00')),
-		);
+		return [
+			[NULL, NULL, NULL],
+			[NULL, '', NULL],
+			['', NULL, NULL],
+			['', '', NULL],
+			['1978-01-23', '12:00', new DateTimeImmutable('1978-01-23 12:00:00')],
+		];
 	}
 
 	/**
@@ -53,11 +53,11 @@ class DateTimeInputTest extends \Tester\TestCase
 	 */
 	public function dataInvalidDates()
 	{
-		return array(
-			array(FALSE),
-			array('1978/01/23'),
-			array(254358000),
-		);
+		return [
+			[FALSE],
+			['1978/01/23'],
+			[254358000],
+		];
 	}
 
 	/**
@@ -116,24 +116,24 @@ class DateTimeInputTest extends \Tester\TestCase
 	 */
 	public function testLoadHttpDataValid($date, $time, $expected)
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => $date,
 				'time' => $time,
-			),
-		));
+			],
+		]);
 
 		Assert::equal($expected, $control->getValue());
 	}
 
 	public function testLoadHttpDataInvalid()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => 'test',
 				'time' => 'test',
-			),
-		));
+			],
+		]);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -143,17 +143,17 @@ class DateTimeInputTest extends \Tester\TestCase
 		$control->validate();
 
 		Assert::true($control->hasErrors());
-		Assert::equal(array('test'), $control->getErrors());
+		Assert::equal(['test'], $control->getErrors());
 	}
 
 	public function testLoadHttpDataInvalidDate()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '2015-02-31',
 				'time' => '11:59',
-			),
-		));
+			],
+		]);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -163,17 +163,17 @@ class DateTimeInputTest extends \Tester\TestCase
 		$control->validate();
 
 		Assert::true($control->hasErrors());
-		Assert::equal(array('test'), $control->getErrors());
+		Assert::equal(['test'], $control->getErrors());
 	}
 
 	public function testLoadHttpDataInvalidTime()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '2015-02-28',
 				'time' => '11:61',
-			),
-		));
+			],
+		]);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -183,7 +183,7 @@ class DateTimeInputTest extends \Tester\TestCase
 		$control->validate();
 
 		Assert::true($control->hasErrors());
-		Assert::equal(array('test'), $control->getErrors());
+		Assert::equal(['test'], $control->getErrors());
 	}
 
 	public function testAttribute()
@@ -273,11 +273,11 @@ class DateTimeInputTest extends \Tester\TestCase
 
 	public function testFilledDate()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '1978-01-23',
-			),
-		));
+			],
+		]);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -289,11 +289,11 @@ class DateTimeInputTest extends \Tester\TestCase
 
 	public function testFilledTime()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'time' => '12:00',
-			),
-		));
+			],
+		]);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -305,12 +305,12 @@ class DateTimeInputTest extends \Tester\TestCase
 
 	public function testFilledBoth()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '1978-01-23',
 				'time' => '12:00',
-			),
-		));
+			],
+		]);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -334,12 +334,12 @@ class DateTimeInputTest extends \Tester\TestCase
 
 	public function testShortHourSanitizer()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '1978-01-23',
 				'time' => '00:00',
-			),
-		));
+			],
+		]);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -350,12 +350,12 @@ class DateTimeInputTest extends \Tester\TestCase
 
 	public function testShortHourSanitizerDisabled()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '1978-01-23',
 				'time' => '00:00',
-			),
-		));
+			],
+		]);
 
 		$control->disableShortHourSanitizer();
 		$control->loadHttpData(); // this must be called
@@ -373,9 +373,9 @@ class DateTimeInputTest extends \Tester\TestCase
 	public function dataNonStrictValidDateTimes()
 	{
 		$data = $this->dataValidDateTimes();
-		$data[] = array('1978 - 01 - 23', '12:00', new DateTimeImmutable('1978-01-23 12:00:00'));
-		$data[] = array('1978-01-23', '12 : 00', new DateTimeImmutable('1978-01-23 12:00:00'));
-		$data[] = array('1978 - 01 - 23', '12 : 00', new DateTimeImmutable('1978-01-23 12:00:00'));
+		$data[] = ['1978 - 01 - 23', '12:00', new DateTimeImmutable('1978-01-23 12:00:00')];
+		$data[] = ['1978-01-23', '12 : 00', new DateTimeImmutable('1978-01-23 12:00:00')];
+		$data[] = ['1978 - 01 - 23', '12 : 00', new DateTimeImmutable('1978-01-23 12:00:00')];
 		return $data;
 	}
 
@@ -387,24 +387,24 @@ class DateTimeInputTest extends \Tester\TestCase
 	 */
 	public function testNonStrictLoadHttpDataValid($date, $time, $expected)
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => $date,
 				'time' => $time,
-			),
-		));
+			],
+		]);
 
 		Assert::equal($expected, $control->getValue());
 	}
 
 	public function testLoadHttpDataValidStrictDateTime()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '1978-01-23',
 				'time' => '12:00',
-			),
-		));
+			],
+		]);
 		$control->enableStrict();
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
@@ -419,12 +419,12 @@ class DateTimeInputTest extends \Tester\TestCase
 
 	public function testLoadHttpDataInvalidStrictDate()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '2015 - 02 - 31',
 				'time' => '12:00',
-			),
-		), true);
+			],
+		], true);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -434,17 +434,17 @@ class DateTimeInputTest extends \Tester\TestCase
 		$control->validate();
 
 		Assert::true($control->hasErrors());
-		Assert::equal(array('test'), $control->getErrors());
+		Assert::equal(['test'], $control->getErrors());
 	}
 
 	public function testLoadHttpDataInvalidStrictTime()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '2015-02-31',
 				'time' => '12 : 00',
-			),
-		), true);
+			],
+		], true);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -454,7 +454,7 @@ class DateTimeInputTest extends \Tester\TestCase
 		$control->validate();
 
 		Assert::true($control->hasErrors());
-		Assert::equal(array('test'), $control->getErrors());
+		Assert::equal(['test'], $control->getErrors());
 	}
 
 	public function testDefaultTime()
@@ -469,12 +469,12 @@ class DateTimeInputTest extends \Tester\TestCase
 
 	public function testInvalidRequired()
 	{
-		$control = $this->createControl(array(
-			'datetime' => array(
+		$control = $this->createControl([
+			'datetime' => [
 				'date' => '2012-02-31',
 				'time' => '25:61',
-			),
-		), true);
+			],
+		], true);
 
 		$control->setRequired('test');
 
@@ -484,7 +484,7 @@ class DateTimeInputTest extends \Tester\TestCase
 		$control->validate();
 
 		Assert::true($control->hasErrors());
-		Assert::equal(array('test'), $control->getErrors());
+		Assert::equal(['test'], $control->getErrors());
 	}
 
 	/**
@@ -518,10 +518,10 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::same($form, $control->getForm());
 	}
 
-	private function createControl($data = array(), $strict = false)
+	private function createControl($data = [], $strict = false)
 	{
 		$_SERVER['REQUEST_METHOD'] = 'POST';
-		$_FILES = array();
+		$_FILES = [];
 		$_POST = $data;
 
 		$form = new \Nette\Forms\Form;

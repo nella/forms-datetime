@@ -48,10 +48,10 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	private $time;
 
 	/** @var mixed[]|array */
-	private $dateAttributes = array();
+	private $dateAttributes = [];
 
 	/** @var mixed[]|array */
-	private $timeAttributes = array();
+	private $timeAttributes = [];
 
 	/** @var bool */
 	private $sanitizeShortHour = TRUE;
