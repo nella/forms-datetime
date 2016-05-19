@@ -197,14 +197,16 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param string $key
+	 * @param string|null $key
 	 * @return \Nette\Utils\Html
 	 */
-	public function getControlPart($key)
+	public function getControlPart($key = NULL)
 	{
 		$name = $this->getHtmlName();
 
-		if ($key === static::NAME_DATE) {
+		if ($key === NULL) {
+			return $this->getControl();
+		} elseif ($key === static::NAME_DATE) {
 			$control = \Nette\Utils\Html::el('input')->name($name . '[' . static::NAME_DATE . ']');
 			$control->data('nella-date-format', $this->dateFormat);
 			$control->value($this->date);
