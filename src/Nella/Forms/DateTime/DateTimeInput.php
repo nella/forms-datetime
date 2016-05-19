@@ -63,9 +63,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	private $defaultTime;
 
 	/**
-	 * @param string
-	 * @param string
-	 * @param string|NULL
+	 * @param string $dateFormat
+	 * @param string $timeFormat
+	 * @param string|NULL $label
 	 */
 	public function __construct(
 		$dateFormat = self::DEFAULT_DATE_FORMAT,
@@ -83,7 +83,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function enableStrict()
 	{
-		$this->strict = true;
+		$this->strict = TRUE;
 		return $this;
 	}
 
@@ -92,12 +92,12 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function disableStrict()
 	{
-		$this->strict = false;
+		$this->strict = FALSE;
 		return $this;
 	}
 
 	/**
-	 * @param \DateTimeInterface|NULL
+	 * @param \DateTimeInterface|NULL $value
 	 * @return \Nella\Forms\DateTime\DateTimeInput
 	 */
 	public function setValue($value = NULL)
@@ -219,7 +219,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 			$control = \Nette\Utils\Html::el('input')->name($name . '[' . static::NAME_TIME . ']');
 			$control->data('nella-time-format', $this->timeFormat);
 			$control->value(
-				$this->time === null && $this->defaultTime !== null ? $this->defaultTime->format($this->timeFormat) : $this->time
+				$this->time === NULL && $this->defaultTime !== NULL ? $this->defaultTime->format($this->timeFormat) : $this->time
 			);
 			$control->type('text');
 
@@ -239,7 +239,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param \Nella\Forms\Control\DateTimeInput
+	 * @param \Nella\Forms\DateTime\DateTimeInput $dateTimeInput
 	 * @return bool
 	 */
 	public function validateDateTime(DateTimeInput $dateTimeInput)
@@ -294,7 +294,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 
 	public function disableShortHourSanitizer()
 	{
-		$this->sanitizeShortHour = false;
+		$this->sanitizeShortHour = FALSE;
 	}
 
 	public function setDefaultTime(\DateTimeImmutable $defaultTime = NULL)
@@ -303,7 +303,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param string
+	 * @param string $input
 	 * @return string
 	 */
 	private function normalizeFormat($input)
@@ -316,7 +316,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param string $message
+	 * @param string|bool $message
 	 * @return \Nella\Forms\DateTime\DateInput
 	 */
 	public function setRequired($message = TRUE)

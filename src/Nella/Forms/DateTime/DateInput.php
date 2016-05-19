@@ -35,8 +35,8 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	private $strict = FALSE;
 
 	/**
-	 * @param string
-	 * @param string|NULL
+	 * @param string $format
+	 * @param string|NULL $label
 	 */
 	public function __construct($format = self::DEFAULT_FORMAT, $label = NULL)
 	{
@@ -51,7 +51,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function enableStrict()
 	{
-		$this->strict = true;
+		$this->strict = TRUE;
 		return $this;
 	}
 
@@ -60,12 +60,12 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function disableStrict()
 	{
-		$this->strict = false;
+		$this->strict = FALSE;
 		return $this;
 	}
 
 	/**
-	 * @param \DateTimeInterface|NULL
+	 * @param \DateTimeInterface|NULL $value
 	 * @return \Nella\Forms\DateTime\DateInput
 	 */
 	public function setValue($value = NULL)
@@ -148,7 +148,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param \Nella\Forms\DateTime\DateInput
+	 * @param \Nella\Forms\DateTime\DateInput $control
 	 * @return bool
 	 */
 	public function validateDate(DateInput $control)
@@ -157,7 +157,7 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param string
+	 * @param string $input
 	 * @return string
 	 */
 	private function normalizeFormat($input)

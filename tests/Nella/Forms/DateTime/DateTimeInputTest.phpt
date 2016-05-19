@@ -63,8 +63,8 @@ class DateTimeInputTest extends \Tester\TestCase
 	/**
 	 * @dataProvider dataValidDateValues
 	 *
-	 * @param DateTimeImmutable|NULL
-	 * @param DateTimeImmutable|NULL
+	 * @param DateTimeImmutable|NULL $input
+	 * @param DateTimeImmutable|NULL $expected
 	 */
 	public function testValidDateTimes($input, $expected)
 	{
@@ -79,7 +79,7 @@ class DateTimeInputTest extends \Tester\TestCase
 	 * @dataProvider dataInvalidDates
 	 * @throws \Nette\InvalidArgumentException
 	 *
-	 * @param string
+	 * @param string $input
 	 */
 	public function testInvalidDateTimes($input)
 	{
@@ -111,8 +111,9 @@ class DateTimeInputTest extends \Tester\TestCase
 	/**
 	 * @dataProvider dataValidDateTimes
 	 *
-	 * @param mixed
-	 * @param DateTimeImmutable|NULL
+	 * @param mixed $date
+	 * @param mixed $time
+	 * @param DateTimeImmutable|NULL $expected
 	 */
 	public function testLoadHttpDataValid($date, $time, $expected)
 	{
@@ -382,8 +383,9 @@ class DateTimeInputTest extends \Tester\TestCase
 	/**
 	 * @dataProvider dataNonStrictValidDateTimes
 	 *
-	 * @param mixed
-	 * @param DateTimeImmutable|NULL
+	 * @param mixed $date
+	 * @param mixed $time
+	 * @param DateTimeImmutable|NULL $expected
 	 */
 	public function testNonStrictLoadHttpDataValid($date, $time, $expected)
 	{
@@ -424,7 +426,7 @@ class DateTimeInputTest extends \Tester\TestCase
 				'date' => '2015 - 02 - 31',
 				'time' => '12:00',
 			],
-		], true);
+		], TRUE);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -444,7 +446,7 @@ class DateTimeInputTest extends \Tester\TestCase
 				'date' => '2015-02-31',
 				'time' => '12 : 00',
 			],
-		], true);
+		], TRUE);
 
 		$control->addRule([$control, 'validateDateTime'], 'test');
 
@@ -474,7 +476,7 @@ class DateTimeInputTest extends \Tester\TestCase
 				'date' => '2012-02-31',
 				'time' => '25:61',
 			],
-		], true);
+		], TRUE);
 
 		$control->setRequired('test');
 
@@ -518,7 +520,7 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::same($form, $control->getForm());
 	}
 
-	private function createControl($data = [], $strict = false)
+	private function createControl($data = [], $strict = FALSE)
 	{
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$_FILES = [];

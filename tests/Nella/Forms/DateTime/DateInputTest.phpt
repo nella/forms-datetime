@@ -61,8 +61,8 @@ class DateInputTest extends \Tester\TestCase
 	/**
 	 * @dataProvider dataValidDateValues
 	 *
-	 * @param DateTimeImmutable|NULL
-	 * @param DateTimeImmutable|NULL
+	 * @param DateTimeImmutable|NULL $input
+	 * @param DateTimeImmutable|NULL $expected
 	 */
 	public function testValidDates($input, $expected)
 	{
@@ -77,7 +77,7 @@ class DateInputTest extends \Tester\TestCase
 	 * @dataProvider dataInvalidDates
 	 * @throws \Nette\InvalidArgumentException
 	 *
-	 * @param string
+	 * @param string $input
 	 */
 	public function testInvalidDates($input)
 	{
@@ -108,8 +108,8 @@ class DateInputTest extends \Tester\TestCase
 	/**
 	 * @dataProvider dataValidDates
 	 *
-	 * @param mixed
-	 * @param DateTimeImmutable|NULL
+	 * @param mixed $input
+	 * @param DateTimeImmutable|NULL $expected
 	 */
 	public function testLoadHttpDataValid($input, $expected)
 	{
@@ -187,8 +187,8 @@ class DateInputTest extends \Tester\TestCase
 	/**
 	 * @dataProvider dataNonStrictDates
 	 *
-	 * @param mixed
-	 * @param DateTimeImmutable|NULL
+	 * @param mixed $input
+	 * @param DateTimeImmutable|NULL $expected
 	 */
 	public function testNonStrictLoadHttpDataValid($input, $expected)
 	{
@@ -204,7 +204,7 @@ class DateInputTest extends \Tester\TestCase
 	{
 		$control = $this->createControl([
 			'date' => '1978-01-23',
-		], true);
+		], TRUE);
 
 		$control->addRule([$control, 'validateDate'], 'test');
 
@@ -220,7 +220,7 @@ class DateInputTest extends \Tester\TestCase
 	{
 		$control = $this->createControl([
 			'date' => '2015 - 02 - 31',
-		], true);
+		], TRUE);
 
 		$control->addRule([$control, 'validateDate'], 'test');
 
@@ -237,7 +237,7 @@ class DateInputTest extends \Tester\TestCase
 	{
 		$control = $this->createControl([
 			'date' => '2012-02-31',
-		], true);
+		], TRUE);
 
 		$control->setRequired('test');
 
@@ -281,7 +281,7 @@ class DateInputTest extends \Tester\TestCase
 		Assert::same($form, $control->getForm());
 	}
 
-	private function createControl($data = [], $strict = false)
+	private function createControl($data = [], $strict = FALSE)
 	{
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$_FILES = [];
