@@ -7,7 +7,6 @@ Date/DateTime control for [Nette Framework](http://nette.org)
 [![Latest Stable Version](https://img.shields.io/packagist/v/nella/forms-datetime.svg?style=flat-square)](https://packagist.org/packages/nella/forms-datetime)
 [![Composer Downloads](https://img.shields.io/packagist/dt/nella/forms-datetime.svg?style=flat-square)](https://packagist.org/packages/nella/forms-datetime)
 [![Dependency Status](https://img.shields.io/versioneye/d/user/projects/5467a35df8a4aeff6c0000e5.svg?style=flat-square)](https://www.versioneye.com/user/projects/5467a35df8a4aeff6c0000e5)
-[![HHVM Status](https://img.shields.io/hhvm/nella/forms-datetime.svg?style=flat-square)](http://hhvm.h4cc.de/package/nella/forms-datetime)
 
 Requirements
 ------------
