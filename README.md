@@ -10,7 +10,7 @@ Date/DateTime control for [Nette Framework](http://nette.org)
 
 Requirements
 ------------
-- Nette >=2.2.0 (2.2.x support will be removed on 31 Jan 2016)
+- Nette >=2.3.0 (2.3.x support will be removed on 31 Jan 2017)
 - PHP >=5.5.0 (5.5.x support will be removed on 10 Jul 2016)
 
 Installation
