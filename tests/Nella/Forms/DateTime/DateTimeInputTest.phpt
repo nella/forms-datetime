@@ -212,6 +212,13 @@ class DateTimeInputTest extends \Tester\TestCase
 		Assert::false(isset($control->getControlPart(DateTimeInput::NAME_TIME)->readonly));
 	}
 
+	public function testPartWithoutPart()
+	{
+		$control = $this->createControl();
+
+		Assert::equal($control->getControl(), $control->getControlPart());
+	}
+
 	public function testRemovingNotSetAttribute()
 	{
 		$control = $this->createControl();
