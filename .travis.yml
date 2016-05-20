@@ -36,4 +36,4 @@ script:
   - vendor/bin/tester -s -p php -c tests/php.ini tests --coverage build/clover.xml --coverage-src src
 
   - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
-  - php coveralls.phar --verbose || true
+  - php coveralls.phar --verbose --config build/coveralls.yml || true
