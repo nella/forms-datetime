@@ -197,7 +197,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param string|null $key
+	 * @param string|NULL $key
 	 * @return \Nette\Utils\Html
 	 */
 	public function getControlPart($key = NULL)
