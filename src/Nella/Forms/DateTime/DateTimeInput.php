@@ -241,10 +241,9 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param \Nella\Forms\DateTime\DateTimeInput $dateTimeInput
 	 * @return bool
 	 */
-	public function validateDateTime(DateTimeInput $dateTimeInput)
+	public function validateDateTime()
 	{
 		return $this->isDisabled() || !$this->isFilled() || $this->getValue() !== NULL;
 	}
