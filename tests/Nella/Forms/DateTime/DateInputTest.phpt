@@ -257,7 +257,23 @@ class DateInputTest extends \Tester\TestCase
 	{
 		$control = $this->createControl();
 
-		$control->setRequired();
+		$control->setRequired([]);
+	}
+
+	public function testRequired()
+	{
+		$control = $this->createControl();
+
+		$control->setRequired(TRUE);
+		Assert::true($control->isRequired());
+	}
+
+	public function testOptional()
+	{
+		$control = $this->createControl();
+
+		$control->setRequired(FALSE);
+		Assert::false($control->isRequired());
 	}
 
 	/**

@@ -169,12 +169,12 @@ class DateInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @param string $message
+	 * @param string|bool $message
 	 * @return \Nella\Forms\DateTime\DateInput
 	 */
 	public function setRequired($message = TRUE)
 	{
-		if (!is_string($message)) {
+		if (!is_bool($message) && !is_string($message)) {
 			throw new \Nette\InvalidArgumentException('Message must be string');
 		}
 

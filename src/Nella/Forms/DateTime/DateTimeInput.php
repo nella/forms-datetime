@@ -322,7 +322,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function setRequired($message = TRUE)
 	{
-		if (!is_string($message)) {
+		if (!is_bool($message) && !is_string($message)) {
 			throw new \Nette\InvalidArgumentException('Message must be string');
 		}
 
