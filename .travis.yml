@@ -21,6 +21,8 @@ matrix:
       env: NETTE=~2.4.0
     - php: 5.5
       env: NETTE=~2.4.0 PREFER_LOWEST=true
+    - php: 5.5
+      env: NETTE=default
 
 before_install:
   - composer self-update
