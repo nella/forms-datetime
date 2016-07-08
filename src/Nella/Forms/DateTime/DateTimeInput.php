@@ -79,7 +79,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @return \Nella\Forms\DateTime\DateInput
+	 * @return \Nella\Forms\DateTime\DateTimeInput
 	 */
 	public function enableStrict()
 	{
@@ -88,7 +88,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	}
 
 	/**
-	 * @return \Nella\Forms\DateTime\DateInput
+	 * @return \Nella\Forms\DateTime\DateTimeInput
 	 */
 	public function disableStrict()
 	{
@@ -319,7 +319,7 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 
 	/**
 	 * @param string|bool $message
-	 * @return \Nella\Forms\DateTime\DateInput
+	 * @return \Nella\Forms\DateTime\DateTimeInput
 	 */
 	public function setRequired($message = TRUE)
 	{
