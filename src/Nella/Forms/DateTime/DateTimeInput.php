@@ -322,16 +322,18 @@ class DateTimeInput extends \Nette\Forms\Controls\BaseControl
 	 */
 	public function setRequired($message = TRUE)
 	{
-		if (!is_bool($message) && !is_string($message)) {
+		if ($message !== FALSE && !is_string($message)) {
 			throw new \Nette\InvalidArgumentException('Message must be string');
 		}
 
 		parent::setRequired($message);
 
-		$this->addCondition(Form::FILLED)
-			->addRule(function (DateTimeInput $control) {
-				return $this->validateDateTime($control);
-			}, $message);
+		if ($message !== FALSE) {
+			$this->addCondition(Form::FILLED)
+				->addRule(function (DateTimeInput $control) {
+					return $this->validateDateTime($control);
+				}, $message);
+		}
 
 		return $this;
 	}

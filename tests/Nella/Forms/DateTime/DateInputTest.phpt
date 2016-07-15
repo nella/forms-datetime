@@ -264,7 +264,7 @@ class DateInputTest extends \Tester\TestCase
 	{
 		$control = $this->createControl();
 
-		$control->setRequired(TRUE);
+		$control->setRequired('Required');
 		Assert::true($control->isRequired());
 	}
 
